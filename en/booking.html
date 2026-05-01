@@ -297,6 +297,112 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight: 700;
       line-height: 1.6;
     }
+    body.video-modal-open {
+      overflow: hidden;
+    }
+    .intro-video-card {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .intro-video-copy {
+      display: grid;
+      gap: 4px;
+    }
+    .intro-video-eyebrow {
+      color: var(--sage-dk);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .intro-video-title {
+      color: var(--sage-dk);
+      font-size: 1.08rem;
+      line-height: 1.3;
+    }
+    .intro-video-text {
+      max-width: 680px;
+      color: var(--mid);
+      font-size: .95rem;
+      line-height: 1.55;
+    }
+    .intro-video-button {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(44, 44, 44, .62);
+      backdrop-filter: blur(8px);
+    }
+    .video-modal.is-open {
+      display: flex;
+    }
+    .video-modal__dialog {
+      position: relative;
+      width: min(92vw, 500px);
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, .28);
+      padding: 20px;
+    }
+    .video-modal__close {
+      position: absolute;
+      top: 12px;
+      inset-inline-end: 12px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(107, 143, 113, .12);
+      color: var(--charcoal);
+      cursor: pointer;
+      font-size: 1.6rem;
+      line-height: 1;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .video-modal__close:hover {
+      background: rgba(107, 143, 113, .2);
+      transform: scale(1.04);
+    }
+    .video-modal__heading {
+      padding-inline-end: 48px;
+      margin-bottom: 14px;
+      color: var(--sage-dk);
+      font-size: 1.25rem;
+      line-height: 1.35;
+    }
+    .video-modal__frame {
+      width: min(100%, 380px);
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #111;
+    }
+    .video-modal__frame iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
 
     .btn-primary,
     .btn-secondary {
@@ -353,6 +459,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .consent-group h2 { font-size: 1.2rem; }
       .consent-group p { font-size: 1rem; }
       .consent-option { padding: 12px 14px; font-size: 1rem; }
+      .intro-video-card {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .intro-video-button {
+        width: 100%;
+      }
+      .video-modal {
+        padding: 14px;
+      }
+      .video-modal__dialog {
+        padding: 16px;
+      }
+      .video-modal__frame {
+        width: min(100%, 330px);
+      }
       .booking-inline-frame { height: 1380px; }
     }
   </style>
@@ -380,6 +502,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p class="hero-tag">Booking</p>
       <h1>Book a Session</h1>
       <p>Choose a convenient time — confirmation and meeting link will be sent automatically to your email.</p>
+    </section>
+
+    <section class="surface intro-video-card" aria-labelledby="intro-video-title">
+      <div class="intro-video-copy">
+        <p class="intro-video-eyebrow">Before booking</p>
+        <h2 id="intro-video-title" class="intro-video-title">Meet Dmitriy before choosing a time</h2>
+        <p class="intro-video-text">If you closed the introduction, you can reopen the video here before continuing with the booking form.</p>
+      </div>
+      <button class="btn-primary intro-video-button" type="button" data-open-intro-video>Watch video</button>
     </section>
 
     <section class="surface consent-card" aria-labelledby="booking-consent-title">
@@ -430,10 +561,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <a class="whatsapp-help" href="https://wa.me/972528056068" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
     <img src="../whatsapp-official-icon.svg" alt="" aria-hidden="true">
   </a>
+  <div class="video-modal" data-intro-video-modal role="dialog" aria-modal="true" aria-labelledby="intro-video-modal-title" aria-hidden="true">
+    <div class="video-modal__dialog">
+      <button class="video-modal__close" type="button" data-close-intro-video aria-label="Close video">&times;</button>
+      <h2 id="intro-video-modal-title" class="video-modal__heading">Intro video with Dmitriy</h2>
+      <div class="video-modal__frame">
+        <iframe
+          data-intro-video-frame
+          title="Dmitriy Kazakov introduction video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      const introVideoModal = document.querySelector('[data-intro-video-modal]');
+      const introVideoFrame = document.querySelector('[data-intro-video-frame]');
+      const introVideoOpeners = Array.from(document.querySelectorAll('[data-open-intro-video]'));
+      const introVideoClosers = Array.from(document.querySelectorAll('[data-close-intro-video]'));
+      const introVideoSrc = 'https://www.youtube-nocookie.com/embed/xA8gP1GijxA?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&mute=0';
       const checkboxes = Array.from(document.querySelectorAll('[data-booking-consent]'));
       const widget = document.querySelector('[data-booking-widget]');
+
+      function openIntroVideo() {
+        if (!introVideoModal || !introVideoFrame) return;
+
+        introVideoFrame.src = introVideoSrc;
+        introVideoModal.classList.add('is-open');
+        introVideoModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('video-modal-open');
+
+        const closeButton = introVideoModal.querySelector('[data-close-intro-video]');
+        if (closeButton) closeButton.focus();
+      }
+
+      function closeIntroVideo() {
+        if (!introVideoModal || !introVideoFrame) return;
+
+        introVideoModal.classList.remove('is-open');
+        introVideoModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('video-modal-open');
+        introVideoFrame.src = '';
+      }
+
+      introVideoOpeners.forEach(function (button) {
+        button.addEventListener('click', openIntroVideo);
+      });
+
+      introVideoClosers.forEach(function (button) {
+        button.addEventListener('click', closeIntroVideo);
+      });
+
+      if (introVideoModal) {
+        introVideoModal.addEventListener('click', function (event) {
+          if (event.target === introVideoModal) closeIntroVideo();
+        });
+      }
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && introVideoModal && introVideoModal.classList.contains('is-open')) {
+          closeIntroVideo();
+        }
+      });
+
+      window.setTimeout(openIntroVideo, 250);
 
       if (!checkboxes.length || !widget) return;
 
