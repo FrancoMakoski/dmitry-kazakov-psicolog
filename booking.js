@@ -220,124 +220,15 @@
       summaryPhone: "טלפון",
       summaryBirthDate: "תאריך לידה",
       summaryReason: "סיבת הפנייה"
-    },
-    en: {
-      pageTitle: "Online Booking & Payment",
-      pageIntro:
-        "Complete a short intake form, choose the service you need, and continue to a secure online booking step. Once the real accounts are connected, this page will handle payment, calendar selection, confirmations, and the video-call link.",
-      heroTag: "Booking",
-      flowTag: "Step 1",
-      flowTitle: "Choose a service and complete the required form",
-      services: {
-        single: {
-          name: "Single Session",
-          priceNote: "45-55 minutes",
-          description:
-            "A direct online session with live slot selection, required prepayment, and an automatic email with the session details.",
-          bullets: [
-            "Online only",
-            "Direct booking from available slots",
-            "Payment before confirmation"
-          ],
-          cta: "Choose Session"
-        },
-        package: {
-          name: "3-Session Package",
-          priceNote: "Paid online, remaining sessions coordinated later",
-          description:
-            "Purchase the full package online. After payment, the remaining sessions are coordinated separately and do not need to be auto-booked from the site.",
-          bullets: [
-            "Online only",
-            "Package purchased in one payment",
-            "Remaining sessions coordinated afterwards"
-          ],
-          cta: "Choose Package"
-        }
-      },
-      selectedBadge: "Selected",
-      formTag: "Step 2",
-      formTitle: "Required intake form before booking",
-      formSub:
-        "Without these details, the payment and booking step does not open. The fields match the future booking-platform setup.",
-      fullName: "Full name",
-      email: "Email",
-      phone: "Phone / WhatsApp",
-      language: "Session language",
-      reason: "Reason for consultation",
-      birthDate: "Date of birth",
-      placeholderFullName: "Enter full name",
-      placeholderEmail: "name@example.com",
-      placeholderPhone: "Enter phone or WhatsApp",
-      placeholderReason:
-        "Briefly describe what you want to work on in the session",
-      languagePlaceholder: "Choose language",
-      languageOptions: {
-        he: "Hebrew",
-        ru: "Russian"
-      },
-      policyTitle: "Cancellation Policy",
-      policyText:
-        "Free cancellation is available up to 24 hours before the session. Late cancellations or no-shows receive a 50% refund.",
-      policyCheckbox:
-        "I have read and accept the cancellation policy and the online booking terms.",
-      adultRule:
-        "Booking is available only for clients aged 18 or older.",
-      submit: "Continue to Booking",
-      paymentHint:
-        "Once the real accounts are connected, online payment, live availability, and automatic emails will appear here.",
-      connectorTag: "Step 3",
-      connectorTitle: "Booking Platform",
-      connectorPendingTitle: "Integration still in staging mode",
-      connectorPendingBody:
-        "This booking area is already connected to the website configuration, but the real provider accounts have not been added yet. As soon as the live URLs and credentials are inserted, available slots, payments, and confirmations will appear here.",
-      bitNoticeTitle: "Payment via Bit",
-      bitNoticeBody: "After selecting your time slot, you will receive a message with Bit payment details. Your booking is confirmed once payment is received.",
-      openExternal: "Open external booking page",
-      summaryTitle: "Booking Rules",
-      summaryRules: [
-        "Online only",
-        "Hebrew and Russian only",
-        "18+ only",
-        "Minimum 24 hours notice",
-        "No buffer between sessions",
-        "Direct booking with no manual approval"
-      ],
-      automationTitle: "What the client receives",
-      automations: [
-        "Booking confirmation email",
-        "24-hour reminder email",
-        "1-hour reminder email",
-        "Automatic video-call link"
-      ],
-      backToSite: "Back to Website",
-      validation: {
-        selectService: "Please choose a service first.",
-        fullName: "Please enter your full name.",
-        email: "Please enter a valid email address.",
-        phone: "Please enter your phone or WhatsApp.",
-        language: "Please choose the session language.",
-        reason: "Please describe the reason for your consultation.",
-        birthDate: "Please enter your date of birth.",
-        age: "Online booking is available only for adults aged 18+.",
-        policy: "You must accept the cancellation policy."
-      },
-      summaryBoxTitle: "Your intake details",
-      summaryService: "Service",
-      summaryLanguage: "Language",
-      summaryEmail: "Email",
-      summaryPhone: "Phone",
-      summaryBirthDate: "Date of birth",
-      summaryReason: "Reason"
     }
   };
 
   const titles = {
     ru: "Дмитрий Казаков — Онлайн-запись",
-    he: "דמיטרי קזקוב — הזמנה אונליין",
-    en: "Dmitriy Kazakov — Online Booking"
+    he: "דמיטרי קזקוב — הזמנה אונליין"
   };
   let state = {
-    lang: localStorage.getItem(storageKey) || document.documentElement.lang || defaultLang,
+    lang: ui[localStorage.getItem(storageKey)] ? localStorage.getItem(storageKey) : (ui[document.documentElement.lang] ? document.documentElement.lang : defaultLang),
     selectedService: "single"
   };
 

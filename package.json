@@ -1,7 +1,7 @@
 {
-  "name": "dmitry-kazakov-psicolog",
+  "name": "dmitry-kazakov-psicosomatologo",
   "version": "1.0.0",
-  "description": "Sitio web de Dmitry Kazakov - Psicólogo",
+  "description": "Sitio web de Dmitry Kazakov - Psicosomatólogo",
   "scripts": {
     "build": "cd server && npm install",
     "start": "npx serve ."
