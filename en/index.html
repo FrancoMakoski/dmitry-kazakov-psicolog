@@ -154,7 +154,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     nav.nav-open .nav-toggle-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     nav.nav-open .nav-toggle-line:nth-child(2) { opacity: 0; }
     nav.nav-open .nav-toggle-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-    .lang-switcher { display: flex; gap: 6px; }
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .lang-btn {
       border: 1.5px solid var(--sage-lt);
       background: transparent; border-radius: 6px;
@@ -570,6 +574,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
+      nav {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      .nav-logo { flex: 0 0 auto; }
       .about-grid { grid-template-columns: 1fr; }
       .hero-inner {
         display: grid;
@@ -618,9 +627,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         grid-column: 1 / -1;
         justify-self: start;
       }
-      .nav-toggle { display: inline-flex; }
+      .nav-toggle {
+        display: inline-flex;
+        order: 3;
+        flex: 0 0 42px;
+      }
+      .lang-switcher {
+        order: 2;
+        margin-inline-start: auto;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 4px;
+      }
       .nav-menu {
         display: none;
+        order: 4;
         position: absolute;
         top: calc(100% + 10px);
         left: 5%;
@@ -647,11 +668,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .nav-links li:not(:last-child) a {
         border-bottom: 1px solid rgba(87, 120, 97, .12);
       }
-      .lang-switcher {
-        justify-content: flex-start;
-        flex-wrap: wrap;
+      .lang-btn {
+        font-size: .86rem;
+        padding: 4px 8px;
+        white-space: nowrap;
       }
-      .lang-btn { font-size: 1.04rem; }
       .steps { gap: 16px; }
       .step { min-width: 140px; }
       section { padding: 22px 4%; }
@@ -734,11 +755,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <li><a href="#contact">Contact</a></li>
       <li><a href="booking.html">Book</a></li>
     </ul>
-    <div class="lang-switcher">
-      <a class="lang-btn" href="../index.html">עב</a>
-      <a class="lang-btn" href="../ru/index.html">РУ</a>
-      <a class="lang-btn active" href="index.html">EN</a>
-    </div>
+  </div>
+  <div class="lang-switcher">
+    <a class="lang-btn" href="../index.html">עב</a>
+    <a class="lang-btn" href="../ru/index.html">РУ</a>
+    <a class="lang-btn active" href="index.html">EN</a>
   </div>
 </nav>
 
@@ -746,7 +767,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-tag">Languages · Russian, Hebrew</div>
       <h1 class="hero-name">Dmitriy Kazakov</h1>
       <p class="hero-title">Psychosomatic Counseling</p>
       <div class="hero-callout">
@@ -1015,7 +1035,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- FOOTER -->
 <footer>
   <strong>Dmitriy Kazakov</strong><br>
-  Languages · Russian, Hebrew<br>
   <a href="../terms.html" style="color:var(--sage-lt);font-size:.8rem;text-decoration:none;opacity:.8;">Terms of Use &amp; Privacy Policy</a>
 </footer>
 
