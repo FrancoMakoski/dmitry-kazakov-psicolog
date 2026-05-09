@@ -3,7 +3,7 @@ setlocal EnableDelayedExpansion
 title Dima Therapy -- Deploy
 color 07
 
-set "REPO_DIR=C:\Users\franc_tcymweq\Desktop\dmitry-kazakov-psicolog"
+set "REPO_DIR=C:\Users\franc_tcymweq\Desktop\Proyectos\DimaThereapy"
 set "GIT_EMAIL=francomakoski3@gmail.com"
 set "GIT_NAME=francomakoski3-lgtm"
 
