@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Дмитрий Казаков — Записаться онлайн</title>
-  <link rel="icon" type="image/png" href="../favicon-d.png" />
+  <link rel="icon" type="image/png" href="../assets/icons/favicon-d.png" />
+  <link rel="stylesheet" href="../assets/css/site.css" />
   <!-- SEO: hreflang -->
   <link rel="alternate" hreflang="he" href="https://dimatherapyonline.com/booking.html" />
   <link rel="alternate" hreflang="ru" href="https://dimatherapyonline.com/ru/booking.html" />
@@ -53,15 +54,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-N56J29D8');</script>
   <!-- End Google Tag Manager -->
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXBHPTBC5V"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18096499266"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
+    gtag('config', 'AW-18096499266');
     gtag('config', 'G-JXBHPTBC5V');
   </script>
-  <script src="/track.js" defer></script>
+  <script src="/assets/js/track.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -485,7 +486,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- End Google Tag Manager (noscript) -->
   <nav>
     <a class="nav-logo" href="index.html" aria-label="Главная">
-      <img src="../favicon-d.png" alt="Dmitriy Kazakov logo" width="42" height="42">
+      <img src="../assets/icons/favicon-d.png" alt="Dmitriy Kazakov logo" width="42" height="42">
     </a>
     <div class="nav-actions">
       <div class="lang-switcher">
@@ -557,7 +558,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </main>
 
   <a class="whatsapp-help" href="https://wa.me/972528056068" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-    <img src="../whatsapp-official-icon.svg" alt="" aria-hidden="true">
+    <img src="../assets/icons/whatsapp-official-icon.svg" alt="" aria-hidden="true">
   </a>
   <div class="video-modal" data-intro-video-modal role="dialog" aria-modal="true" aria-labelledby="intro-video-modal-title" aria-hidden="true">
     <div class="video-modal__dialog">
@@ -581,6 +582,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const introVideoSrc = 'https://www.youtube-nocookie.com/embed/xA8gP1GijxA?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&mute=0';
       const checkboxes = Array.from(document.querySelectorAll('[data-booking-consent]'));
       const widget = document.querySelector('[data-booking-widget]');
+      let bookingTermsEventSent = false;
+
+      function trackBookingTermsAccepted() {
+        if (bookingTermsEventSent) return;
+        bookingTermsEventSent = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'booking_terms_accepted',
+          booking_provider: 'google_calendar',
+          lead_type: 'booking_intent',
+          page_language: 'ru'
+        });
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-18096499266/3jZ_CP69hK0cEMLUirVD'
+          });
+        }
+      }
 
       function openIntroVideo() {
         if (!introVideoModal || !introVideoFrame) return;
@@ -639,6 +658,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         widget.classList.toggle('is-ready', isReady);
 
         if (isReady && !wasReady) {
+          trackBookingTermsAccepted();
           window.setTimeout(function () {
             widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 160);
