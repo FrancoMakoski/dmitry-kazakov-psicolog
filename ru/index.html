@@ -435,21 +435,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* ===== SERVICES ===== */
     #services { background: var(--white); }
     .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
     }
     .service-card {
       background: var(--cream); border-radius: var(--radius);
+      border: 1px solid rgba(74,105,80,.18);
       padding: 36px 32px; position: relative; overflow: hidden;
       box-shadow: 0 2px 16px var(--shadow);
       transition: transform var(--transition);
     }
     .service-card:hover { transform: translateY(-4px); }
-    .service-card.featured { background: var(--sage-dk); color: var(--white); }
-    .service-card.featured .price,
-    .service-card.featured h3,
-    .service-card.featured p,
-    .service-card.featured li { color: var(--white); }
-    .service-card.featured .service-tag { background: rgba(255,255,255,.2); color: var(--white); }
+    .service-card.featured {
+      background: #E4EAE1;
+      border-color: rgba(74,105,80,.24);
+      color: var(--charcoal);
+      box-shadow: 0 10px 28px rgba(74,105,80,.12);
+    }
+    .service-card.premium {
+      background: linear-gradient(160deg, #385640 0%, #4a6950 68%, #6f805f 100%);
+      border-color: rgba(240,217,143,.48);
+      color: var(--white);
+      box-shadow: 0 12px 34px rgba(56, 86, 64, .22);
+    }
+    .service-card.premium .price,
+    .service-card.premium h3,
+    .service-card.premium p,
+    .service-card.premium li { color: var(--white); }
+    .service-card.featured h3 { color: #26362a; }
+    .service-card.featured .price { color: var(--sage-dk); }
+    .service-card.featured li {
+      color: #415043;
+      border-bottom-color: rgba(74,105,80,.12);
+    }
+    .service-card.featured .service-tag { background: var(--sage-dk); color: var(--white); }
+    .service-card.featured .btn-primary {
+      background: var(--sage-dk);
+      color: var(--white);
+      box-shadow: 0 10px 22px rgba(74,105,80,.18);
+    }
+    .service-card.featured .btn-primary:hover { background: #3f5b45; }
+    .service-card.premium .service-tag { background: rgba(238,221,174,.22); color: #fff6dd; }
     .service-tag {
       display: inline-block; background: var(--sage-lt);
       color: var(--sage-dk); border-radius: 20px;
@@ -461,6 +486,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: 2.2rem; font-weight: 800; color: var(--sage-dk);
       margin-bottom: 6px; line-height: 1;
     }
+    .price-row {
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .old-price {
+      color: rgba(255,255,255,.72);
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1;
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+    }
     .price-note { font-size: .82rem; color: var(--light); margin-bottom: 20px; }
     .service-card ul { list-style: none; padding: 0; margin-bottom: 28px; }
     .service-card li {
@@ -469,7 +506,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display: flex; align-items: center; gap: 8px;
     }
     .service-card li::before { content: "✓"; color: var(--sage); font-weight: 700; }
-    .service-card.featured li::before { color: var(--sage-lt); }
+    .service-card.featured li::before { color: var(--sage-dk); }
+    .service-card.premium li::before { color: #f0d98f; }
     .service-card p { font-size: .92rem; color: var(--mid); margin-bottom: 24px; }
 
     /* ===== HOW IT WORKS ===== */
@@ -944,16 +982,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </ul>
           <a href="booking.html?service=single" class="btn-primary">Записаться онлайн</a>
       </div>
-      <!-- Package -->
+      <!-- Mid Package -->
       <div class="service-card featured">
         <span class="service-tag">Интенсивная терапия</span>
-        <h3>Решение проблемы - цикл до трех сессий</h3>
-        <div class="price">₪3,500</div>
+        <h3>Решение конкретной проблемы - цикл до трех сессий</h3>
+        <div class="price-row">
+          <div class="price">₪2,190</div>
+        </div>
         <ul>
           <li>Фокус на конкретной проблеме: страхе, тревоге, личностном развитии, уверенности в себе.</li>
           <li>Четкий и персональный план действий</li>
           <li>Личное сопровождение вашего прогресса</li>
           <li>Надежная проверка результата — вы почувствуете изменения!</li>
+        </ul>
+          <a href="booking.html?service=package" class="btn-primary">Записаться онлайн</a>
+      </div>
+      <!-- Premium Package -->
+      <div class="service-card premium">
+        <span class="service-tag">Фокус на панике</span>
+        <h3>Решение панических атак - цикл до пяти сессий</h3>
+        <div class="price">₪3,490</div>
+        <ul>
+          <li>Глубокая работа с паническими атаками, триггерами и повторяющимися реакциями</li>
+          <li>Персональный план действий во время приступа</li>
+          <li>Постепенное сопровождение к ощущению безопасности и устойчивости</li>
+          <li>Личное отслеживание прогресса между встречами</li>
         </ul>
           <a href="booking.html?service=package" class="btn-primary" style="background:white;color:var(--sage-dk);">Записаться онлайн</a>
       </div>
