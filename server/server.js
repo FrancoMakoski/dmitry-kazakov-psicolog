@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto  = require('crypto');
+const fs      = require('fs');
 const path    = require('path');
 const express = require('express');
 const cors    = require('cors');
@@ -107,6 +108,7 @@ function computeWidths(rows, valueKey) {
 // Express app
 // ---------------------------------------------------------------------------
 const app = express();
+const SITE_ROOT = path.join(__dirname, '..');
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '10kb' }));
 
@@ -223,9 +225,45 @@ app.get('/api/analytics', (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// 301 redirect extensionless page URLs to their existing .html files
+// ---------------------------------------------------------------------------
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+
+  const cleanPath = req.path;
+  const normalizedPath = cleanPath !== '/' ? cleanPath.replace(/\/+$/, '') : cleanPath;
+  if (
+    normalizedPath === '/' ||
+    normalizedPath.startsWith('/api/') ||
+    normalizedPath === '/api/analytics' ||
+    normalizedPath === '/track' ||
+    normalizedPath === '/event' ||
+    normalizedPath === '/health' ||
+    path.extname(normalizedPath)
+  ) {
+    return next();
+  }
+
+  const relativePath = normalizedPath.replace(/^\/+/, '');
+  const absolutePath = path.join(SITE_ROOT, relativePath);
+
+  if (fs.existsSync(absolutePath) && fs.statSync(absolutePath).isDirectory()) {
+    return next();
+  }
+
+  const htmlPath = path.join(SITE_ROOT, relativePath + '.html');
+  if (!fs.existsSync(htmlPath) || !fs.statSync(htmlPath).isFile()) {
+    return next();
+  }
+
+  const query = req.url.slice(req.path.length);
+  return res.redirect(301, normalizedPath + '.html' + query);
+});
+
+// ---------------------------------------------------------------------------
 // Static files — serve the entire site from the repo root
 // ---------------------------------------------------------------------------
-app.use(express.static(path.join(__dirname, '..'), { index: 'index.html' }));
+app.use(express.static(SITE_ROOT, { index: 'index.html' }));
 
 // ---------------------------------------------------------------------------
 // Start

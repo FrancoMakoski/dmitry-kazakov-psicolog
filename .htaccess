@@ -1,0 +1,21 @@
+RewriteEngine On
+
+# Keep existing .html URLs working, but add 301 aliases from /page to /page.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !^/track/?$
+RewriteCond %{REQUEST_URI} !^/event/?$
+RewriteCond %{REQUEST_URI} !^/health/?$
+RewriteCond %{REQUEST_URI} !\.[^./]+$
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+[^/])$ /$1.html [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !^/track/?$
+RewriteCond %{REQUEST_URI} !^/event/?$
+RewriteCond %{REQUEST_URI} !^/health/?$
+RewriteCond %{REQUEST_URI} !\.[^./]+$
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+)/$ /$1.html [R=301,L]
