@@ -1,6 +1,24 @@
 RewriteEngine On
 
-# Keep existing .html URLs working, but add 301 aliases from /page to /page.html
+# Legacy aliases to the current home pages
+RewriteRule ^dmitry-kazakov(?:\.html)?/?$ / [R=301,L]
+RewriteRule ^ru/dmitry-kazakov(?:\.html)?/?$ /ru/ [R=301,L]
+RewriteRule ^index(?:\.html)?/?$ / [R=301,L]
+RewriteRule ^ru/index(?:\.html)?/?$ /ru/ [R=301,L]
+
+# Canonical clean URLs for all other HTML pages
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+# Remove trailing slash from page-style URLs, but keep real directories such as /ru/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !^/track/?$
+RewriteCond %{REQUEST_URI} !^/event/?$
+RewriteCond %{REQUEST_URI} !^/health/?$
+RewriteCond %{REQUEST_URI} !\.[^./]+$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Internally rewrite clean page URLs to their existing .html files
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/api/
@@ -8,14 +26,5 @@ RewriteCond %{REQUEST_URI} !^/track/?$
 RewriteCond %{REQUEST_URI} !^/event/?$
 RewriteCond %{REQUEST_URI} !^/health/?$
 RewriteCond %{REQUEST_URI} !\.[^./]+$
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+[^/])$ /$1.html [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/api/
-RewriteCond %{REQUEST_URI} !^/track/?$
-RewriteCond %{REQUEST_URI} !^/event/?$
-RewriteCond %{REQUEST_URI} !^/health/?$
-RewriteCond %{REQUEST_URI} !\.[^./]+$
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-RewriteRule ^(.+)/$ /$1.html [R=301,L]
+RewriteRule ^(.+?)/?$ /$1.html [L]

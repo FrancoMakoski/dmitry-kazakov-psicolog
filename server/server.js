@@ -109,6 +109,16 @@ function computeWidths(rows, valueKey) {
 // ---------------------------------------------------------------------------
 const app = express();
 const SITE_ROOT = path.join(__dirname, '..');
+const LEGACY_REDIRECTS = new Map([
+  ['/dmitry-kazakov', '/'],
+  ['/dmitry-kazakov.html', '/'],
+  ['/ru/dmitry-kazakov', '/ru/'],
+  ['/ru/dmitry-kazakov.html', '/ru/'],
+  ['/index', '/'],
+  ['/index.html', '/'],
+  ['/ru/index', '/ru/'],
+  ['/ru/index.html', '/ru/']
+]);
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '10kb' }));
 
@@ -225,45 +235,72 @@ app.get('/api/analytics', (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
-// 301 redirect extensionless page URLs to their existing .html files
+// Normalize public page URLs to clean paths and serve extensionless pages
 // ---------------------------------------------------------------------------
 app.use((req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next();
 
-  const cleanPath = req.path;
-  const normalizedPath = cleanPath !== '/' ? cleanPath.replace(/\/+$/, '') : cleanPath;
+  const requestPath = req.path;
+  const query = req.originalUrl.slice(req.path.length);
+  const normalizedPath = requestPath !== '/' ? requestPath.replace(/\/+$/, '') : requestPath;
+
   if (
-    normalizedPath === '/' ||
     normalizedPath.startsWith('/api/') ||
     normalizedPath === '/api/analytics' ||
     normalizedPath === '/track' ||
     normalizedPath === '/event' ||
-    normalizedPath === '/health' ||
-    path.extname(normalizedPath)
+    normalizedPath === '/health'
   ) {
     return next();
   }
 
-  const relativePath = normalizedPath.replace(/^\/+/, '');
-  const absolutePath = path.join(SITE_ROOT, relativePath);
+  const legacyTarget = LEGACY_REDIRECTS.get(requestPath) || LEGACY_REDIRECTS.get(normalizedPath);
+  if (legacyTarget) {
+    return res.redirect(301, legacyTarget + query);
+  }
 
-  if (fs.existsSync(absolutePath) && fs.statSync(absolutePath).isDirectory()) {
+  if (requestPath.endsWith('.html')) {
+    const cleanTarget = requestPath.slice(0, -'.html'.length) || '/';
+    return res.redirect(301, cleanTarget + query);
+  }
+
+  if (
+    requestPath.length > 1 &&
+    requestPath.endsWith('/') &&
+    !path.extname(normalizedPath)
+  ) {
+    const relativeDirectory = normalizedPath.replace(/^\/+/, '');
+    const absoluteDirectory = path.join(SITE_ROOT, relativeDirectory);
+    if (!fs.existsSync(absoluteDirectory) || !fs.statSync(absoluteDirectory).isDirectory()) {
+      const htmlPath = path.join(SITE_ROOT, relativeDirectory + '.html');
+      if (fs.existsSync(htmlPath) && fs.statSync(htmlPath).isFile()) {
+        return res.redirect(301, normalizedPath + query);
+      }
+    }
+  }
+
+  if (normalizedPath === '/' || path.extname(normalizedPath)) {
+    return next();
+  }
+
+  const relativePath = normalizedPath.replace(/^\/+/, '');
+  const absoluteDirectory = path.join(SITE_ROOT, relativePath);
+  if (fs.existsSync(absoluteDirectory) && fs.statSync(absoluteDirectory).isDirectory()) {
     return next();
   }
 
   const htmlPath = path.join(SITE_ROOT, relativePath + '.html');
-  if (!fs.existsSync(htmlPath) || !fs.statSync(htmlPath).isFile()) {
-    return next();
+  if (fs.existsSync(htmlPath) && fs.statSync(htmlPath).isFile()) {
+    return res.sendFile(htmlPath);
   }
 
-  const query = req.url.slice(req.path.length);
-  return res.redirect(301, normalizedPath + '.html' + query);
+  return next();
 });
 
 // ---------------------------------------------------------------------------
 // Static files — serve the entire site from the repo root
 // ---------------------------------------------------------------------------
-app.use(express.static(SITE_ROOT, { index: 'index.html' }));
+app.use(express.static(SITE_ROOT, { index: 'index.html', extensions: ['html'] }));
 
 // ---------------------------------------------------------------------------
 // Start
