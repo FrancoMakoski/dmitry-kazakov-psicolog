@@ -6,3 +6,4 @@ server/package-lock.json
 .env
 .env.local
 *.db
+ads/

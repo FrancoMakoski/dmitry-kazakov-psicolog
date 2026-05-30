@@ -260,6 +260,69 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .consent-option span {
       flex: 1;
     }
+    .consent-card {
+      margin-bottom: 24px;
+      display: grid;
+      gap: 20px;
+    }
+    .consent-card-header { display: grid; gap: 4px; }
+    .consent-card-header h2 {
+      color: var(--sage-dk);
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+    .consent-card-header p {
+      color: var(--mid);
+      font-size: .9rem;
+    }
+    .consent-terms-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+    .consent-terms-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(107, 143, 113, .16);
+      background: rgba(107, 143, 113, .05);
+      font-size: .88rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+    .consent-terms-list li::before {
+      content: "•";
+      color: var(--sage);
+      font-size: 1.2rem;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+    .consent-accept-btn {
+      width: 100%;
+      padding: 16px 24px;
+      font-size: 1rem;
+      border-radius: 16px;
+      justify-content: center;
+    }
+    .consent-accepted-note {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(107, 143, 113, .1);
+      border: 1px solid rgba(107, 143, 113, .28);
+      border-radius: 14px;
+      color: var(--sage-dk);
+      font-weight: 700;
+      font-size: .95rem;
+    }
+    .consent-card.is-accepted .consent-accept-btn { display: none; }
+    .consent-card.is-accepted .consent-accepted-note { display: flex; }
+
     .booking-widget-shell {
       position: relative;
       overflow: hidden;
@@ -289,9 +352,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: linear-gradient(180deg, rgba(247, 244, 239, .92), rgba(255, 255, 255, .96));
       border: 1px solid rgba(107, 143, 113, .18);
     }
-    .booking-widget-shell.is-ready .booking-widget-lock {
-      display: none;
-    }
+    .booking-widget-shell.is-ready .booking-widget-lock { display: none; }
     .booking-widget-note {
       max-width: 420px;
       color: var(--sage-dk);
@@ -491,6 +552,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <img src="assets/icons/favicon-d.png" alt="Dmitriy Kazakov logo" width="42" height="42">
     </a>
     <div class="nav-actions">
+      <a class="back-link" href="/">← לדף הבית</a>
       <div class="lang-switcher">
         <a class="lang-btn active" href="/booking">עב</a>
         <a class="lang-btn" href="/ru/booking">РУ</a>
@@ -500,50 +562,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <main class="page">
     <section class="hero">
-      <p class="hero-tag">Booking</p>
-      <h1>לתאום פגישה</h1>
-      <p>בחרו זמן נוח — אישור וקישור לפגישה יישלחו אוטומטית למייל.</p>
+      <p class="hero-tag">קביעת פגישה</p>
+      <h1>בחרו זמן שמתאים לכם</h1>
+      <p>בחרו תאריך ושעה — אישור וקישור לפגישה יישלחו אוטומטית למייל שלכם.</p>
     </section>
 
     <section class="surface intro-video-card" aria-labelledby="intro-video-title">
       <div class="intro-video-copy">
-        <p class="intro-video-eyebrow">לפני התיאום</p>
-        <h2 id="intro-video-title" class="intro-video-title">הכירו את דמיטרי לפני בחירת זמן</h2>
-        <p class="intro-video-text">אם סגרתם את סרטון ההיכרות, תוכלו לפתוח אותו שוב כאן לפני המשך התיאום.</p>
+        <p class="intro-video-eyebrow">רוצים להכיר קצת לפני?</p>
+        <h2 id="intro-video-title" class="intro-video-title">סרטון היכרות קצר עם דמיטרי</h2>
+        <p class="intro-video-text">30 שניות שיעזרו לכם להבין את הגישה ולהרגיש בנוח. לא חובה — אפשר לקבוע ישירות.</p>
       </div>
-      <button class="btn-primary intro-video-button" type="button" data-open-intro-video>צפייה בסרטון</button>
+      <button class="btn-primary intro-video-button" type="button" data-open-intro-video>▶ צפייה בסרטון</button>
     </section>
 
-    <section class="surface consent-card" aria-labelledby="booking-consent-title">
-      <div class="consent-group">
-        <h2 id="booking-consent-title">הצהרת מטופל</h2>
-        <p>לצורך התאמה מיטבית של התהליך עבורי, אני מצהיר/ה כי:</p>
-        <label class="consent-option">
-          <input type="checkbox" class="consent-checkbox" data-booking-consent>
-          <span>אני בן/בת 18 ומעלה.</span>
-        </label>
-        <label class="consent-option">
-          <input type="checkbox" class="consent-checkbox" data-booking-consent>
-          <span>איני נוטל/ת תרופות פסיכיאטריות ואיני נמצא/ת במעקב פסיכיאטרי.</span>
-        </label>
+    <section class="surface consent-card" id="consent-section" aria-labelledby="booking-consent-title">
+      <div class="consent-card-header">
+        <h2 id="booking-consent-title">הצהרת מטופל והסכמה לתהליך</h2>
+        <p>לחיצה על הכפתור מאשרת את ארבעת הסעיפים הבאים:</p>
       </div>
-
-      <div class="consent-group">
-        <h2>הסכמה לתהליך הטיפולי</h2>
-        <label class="consent-option">
-          <input type="checkbox" class="consent-checkbox" data-booking-consent>
-          <span>ידוע לי כי במידה והמטפל ימצא לנכון, מתוך אחריות מקצועית ודאגה לטובתי, ניתן יהיה להפסיק את התהליך. במקרה כזה יוחזר הסכום ששולם.</span>
-        </label>
-        <label class="consent-option">
-          <input type="checkbox" class="consent-checkbox" data-booking-consent>
-          <span>לשמירה על תיאום מיטבי, ידוע לי כי ביטול פגישה בפחות מ-24 שעות מראש, או אי-הגעה, ייחשבו כביטול מאוחר, והמקדמה תשמש כדמי ביטול.</span>
-        </label>
-      </div>
+      <ul class="consent-terms-list">
+        <li>אני בן/בת 18 ומעלה.</li>
+        <li>איני נוטל/ת תרופות פסיכיאטריות ואיני נמצא/ת במעקב פסיכיאטרי.</li>
+        <li>ידוע לי כי במידה והמטפל ימצא לנכון, מתוך אחריות מקצועית ודאגה לטובתי, ניתן יהיה להפסיק את התהליך. במקרה כזה יוחזר הסכום ששולם.</li>
+        <li>לשמירה על תיאום מיטבי, ידוע לי כי ביטול פגישה בפחות מ-24 שעות מראש, או אי-הגעה, ייחשבו כביטול מאוחר, והמקדמה תשמש כדמי ביטול.</li>
+      </ul>
+      <button class="btn-primary consent-accept-btn" type="button" data-accept-all-consent>✓ &nbsp;מאשר/ת את כל התנאים — פתח/י את היומן</button>
+      <div class="consent-accepted-note" aria-live="polite">✓ &nbsp;תנאים אושרו — היומן פתוח למטה</div>
     </section>
 
     <div class="surface booking-widget-shell" data-booking-widget>
       <div class="booking-widget-lock" aria-live="polite">
-        <p class="booking-widget-note">יש לאשר את כל הסעיפים כדי לפתוח את היומן ולקבוע פגישה.</p>
+        <p class="booking-widget-note">אשר/י את התנאים למעלה כדי לפתוח את היומן ולקבוע פגישה.</p>
       </div>
       <!-- Google Calendar Appointment Scheduling begin -->
       <iframe
@@ -582,8 +632,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const introVideoOpeners = Array.from(document.querySelectorAll('[data-open-intro-video]'));
       const introVideoClosers = Array.from(document.querySelectorAll('[data-close-intro-video]'));
       const introVideoSrc = 'https://www.youtube-nocookie.com/embed/xA8gP1GijxA?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&mute=0';
-      const checkboxes = Array.from(document.querySelectorAll('[data-booking-consent]'));
       const widget = document.querySelector('[data-booking-widget]');
+      const consentSection = document.getElementById('consent-section');
+      const acceptAllBtn = document.querySelector('[data-accept-all-consent]');
       let bookingTermsEventSent = false;
 
       function trackBookingTermsAccepted() {
@@ -644,36 +695,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       });
 
-      window.setTimeout(openIntroVideo, 250);
-
-      if (!checkboxes.length || !widget) return;
-
-      let wasReady = checkboxes.every(function (checkbox) {
-        return checkbox.checked;
-      });
-
-      function syncBookingAccess() {
-        const isReady = checkboxes.every(function (checkbox) {
-          return checkbox.checked;
-        });
-
-        widget.classList.toggle('is-ready', isReady);
-
-        if (isReady && !wasReady) {
+      // Single accept-all button unlocks the calendar
+      if (acceptAllBtn && widget && consentSection) {
+        acceptAllBtn.addEventListener('click', function () {
+          consentSection.classList.add('is-accepted');
+          widget.classList.add('is-ready');
           trackBookingTermsAccepted();
           window.setTimeout(function () {
             widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 160);
-        }
-
-        wasReady = isReady;
+        });
       }
-
-      checkboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', syncBookingAccess);
-      });
-
-      syncBookingAccess();
     });
   </script>
 </body>

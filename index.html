@@ -767,6 +767,117 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         font-size: clamp(1.5rem, 8vw, 1.9rem);
       }
     }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--cream); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 2px 16px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border: 1px solid rgba(107,143,113,.12);
+    }
+    .testimonial-stars {
+      color: #e8a417;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+    }
+    .testimonial-card blockquote {
+      font-size: .96rem;
+      color: var(--mid);
+      line-height: 1.75;
+      font-style: italic;
+      border: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+    .testimonial-card cite {
+      font-size: .88rem;
+      color: var(--sage-dk);
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    /* ===== CONTACT FORM ===== */
+    .contact-form {
+      display: grid;
+      gap: 12px;
+      text-align: start;
+      margin-top: 28px;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .contact-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(107,143,113,.24);
+      border-radius: 12px;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: .95rem;
+      font-family: inherit;
+      transition: border-color var(--transition);
+      resize: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--sage);
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--light);
+    }
+    .contact-form-submit {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .contact-form-success {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: rgba(107,143,113,.1);
+      border: 1px solid rgba(107,143,113,.28);
+      border-radius: 14px;
+      color: var(--sage-dk);
+      font-weight: 600;
+      font-size: .96rem;
+      text-align: center;
+    }
+    .contact-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0 0;
+      color: var(--light);
+      font-size: .85rem;
+    }
+    .contact-divider::before,
+    .contact-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,0,0,.1);
+    }
+    @media (max-width: 640px) {
+      .contact-form-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -791,6 +902,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <li><a href="/credentials">הכשרה</a></li>
       <li><a href="#psychosomatics">פסיכוסומטיקה</a></li>
       <li><a href="#services">שירותים</a></li>
+      <li><a href="#testimonials">המלצות</a></li>
       <li><a href="#contact">צור קשר</a></li>
       <li><a href="/booking">לתאום</a></li>
     </ul>
@@ -805,31 +917,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-text">
+      <p class="hero-tag">טיפול בחרדה, פחד ובושה — אונליין</p>
       <h1 class="hero-name">דמיטרי קזקוב</h1>
-      <p class="hero-title">מומחה לפסיכוסומטיקה</p>
+      <p class="hero-title">פסיכוסומטולוג | טיפול רגשי אונליין</p>
       <div class="hero-callout">
         <div id="hero-callout-he-summary" class="hero-callout-summary">
-          <strong>שינוי עמוק בביטחון העצמי — במפגשים אישיים<br>מהבית, בפורמט נוח: WhatsApp, Telegram, Viber או Zoom</strong>
-          ברוב הטיפולים מלמדים להתמודד עם פחד, בושה, אשמה וכעס.<br>
-          בגישה שלי, אני משנה את ההגדרה בתת־המודע — כך שהרגשות האלה משתנים מהשורש, ‏עקב כך‏ אוטומטית נוצרת תחושה של רוגע וביטחון.<br><br>
+          <strong>שינוי עמוק בעולם הפנימי<br>מפגשים אישיים מהבית: WhatsApp, Telegram, Viber או Zoom</strong>
+          ברוב הטיפולים מלמדים להתמודד עם חרדה, פחד, בושה, אשמה וכעס.<br>
+          בגישה שלי, אני משנה את ההגדרה בתת־המודע — כך שהרגשות האלה משתנים מהשורש, ‏עקב כך‏ אוטומטית נוצרת תחושה של רוגע וביטחון עצמי.<br><br>
           <strong>מקרים נפוצים — אולי אתה מזהה את עצמך כאן:</strong>
         </div>
         <a href="#" class="hero-readmore" id="hero-callout-he-more" data-readmore-btn data-hide-target="hero-callout-he-summary" data-target="hero-callout-he-full">קרא עוד</a>
         <div id="hero-callout-he-full" class="hero-callout-extra" hidden>
-          <strong>שינוי עמוק בביטחון העצמי — במפגשים אישיים<br>מהבית, בפורמט נוח: WhatsApp, Telegram, Viber או Zoom</strong>
-          ברוב הטיפולים מלמדים להתמודד עם פחד, בושה, אשמה וכעס.<br>
-          בגישה שלי, אני משנה את ההגדרה בתת־המודע — כך שהרגשות האלה משתנים מהשורש, ‏עקב כך‏ אוטומטית נוצרת תחושה של רוגע וביטחון.<br><br>
+          <strong>שינוי עמוק בעולם הפנימי<br>מפגשים אישיים מהבית: WhatsApp, Telegram, Viber או Zoom</strong>
+          ברוב הטיפולים מלמדים להתמודד עם חרדה, פחד, בושה, אשמה וכעס.<br>
+          בגישה שלי, אני משנה את ההגדרה בתת־המודע — כך שהרגשות האלה משתנים מהשורש, ‏עקב כך‏ אוטומטית נוצרת תחושה של רוגע וביטחון עצמי.<br><br>
           מקרים נפוצים — אולי אתה מזהה את עצמך כאן:
           <ul class="hero-callout-list">
-            <li><strong>פחד מראיון עבודה</strong>אתה מתכונן שוב ושוב, אבל ברגע האמת הקול נחלש, המחשבות מתבלבלות, ואתה יוצא בתחושה שלא הבאת את עצמך באמת.</li>
-            <li><strong>דחיינות</strong>אתה יודע בדיוק מה צריך לעשות — אבל משהו עוצר. אתה דוחה, מתעסק בדברים קטנים, ואז מגיע לחץ, אשמה ותחושת פספוס.</li>
-            <li><strong>פחד מהיכרות (זוגיות)</strong>אתה רוצה להתקרב, אבל ברגע שזה נהיה אמיתי — עולה חשש מדחייה, ואתה נסגר או מתרחק.</li>
-            <li><strong>פחד קהל / פחד להתבטא</strong>אתה יודע מה אתה רוצה להגיד, אבל הגוף מגיב — דופק מואץ, יובש בפה, פחד להישפט.</li>
-            <li><strong>פחד להיראות / להצליח בתחום שלך</strong>יש לך יכולות — אבל עולה מחשבה: “יראו אותי, ישפטו אותי, ידחו אותי”. ואתה נשאר מאחור.</li>
-            <li><strong>פחד לטעות / תחושת נחיתות</strong>מחשבות כמו: “אני לא מספיק טוב”, “אחרים יותר טובים ממני” — עוצרות אותך מלפעול.</li>
+            <li><strong>רגשות מודחקים</strong>אתה מחזיק בפנים, מתאפק, ממשיך כרגיל — אבל בפנים מצטבר עומס רגשי שלא נעלם.</li>
+            <li><strong>עומס רגשי ושחיקה בתוך המשפחה</strong>במהלך היום העומס מצטבר, הסבלנות נגמרת, ואז מגיעות תגובות שאתה אחר כך מצטער עליהן. בסוף היום נשארים אשמה, תסכול ועייפות רגשית.</li>
+            <li><strong>חרדה חברתית</strong>לפני או במהלך מפגשים עולה מתח, מודעות עצמית גבוהה ופחד מאיך שרואים אותך.</li>
+            <li><strong>דחיינות</strong>אתה יודע בדיוק מה צריך לעשות — אבל משהו עוצר. אתה דוחה, מתעסק בדברים קטנים, ואז מגיעים לחץ, אשמה ותחושת פספוס.</li>
+            <li><strong>פחד קהל / פחד להתבטא</strong>אתה יודע מה אתה רוצה להגיד, אבל הגוף מגיב — דופק מואץ, יובש בפה ופחד להישפט.</li>
             <li><strong>פחד משינויים</strong>גם כשאתה יודע שמשהו לא טוב לך — קשה לזוז. הלא נודע מרגיש מאיים יותר מהמצב הקיים.</li>
-            <li><strong>קושי להציב גבולות</strong>אתה אומר “כן” כשאתה רוצה להגיד “לא”, ואז נשאר עם תסכול, כעס פנימי ושחיקה.</li>
-            <li><strong>חרדה חברתית</strong>לפני או במהלך מפגשים — עולה מתח, מודעות עצמית גבוהה, פחד מאיך רואים אותך.</li>
+            <li><strong>קושי להציב גבולות</strong>אתה אומר "כן" כשאתה רוצה להגיד "לא", ואז נשאר עם תסכול, כעס פנימי ושחיקה.</li>
+            <li><strong>פחד מהיכרות (זוגיות)</strong>אתה רוצה להתקרב, אבל ברגע שזה נהיה אמיתי — עולה חשש מדחייה, ואתה נסגר או מתרחק.</li>
+            <li><strong>פחד לטעות / תחושת נחיתות</strong>מחשבות כמו "אני לא מספיק טוב" או "אחרים יותר טובים ממני" עוצרות אותך מלפעול.</li>
           </ul>
           <span class="hero-callout-strong-line">זה לא אופי.</span><br>
           זה דפוס פנימי שניתן <span class="hero-callout-underline">לשנות</span>.
@@ -839,6 +952,57 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <a href="/booking" class="btn-primary hero-booking-cta">קבע פגישה אונליין</a>
     </div>
       <div class="hero-image"><img src="assets/img/dmitry-photo.png" alt="דמיטרי קזקוב" width="503" height="492" loading="eager" fetchpriority="high" decoding="async"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <p class="section-tag">שירותים ומחירים</p>
+    <h2 class="section-title">כיצד אוכל לעזור</h2>
+    <div class="services-grid card-grid">
+      <!-- Session -->
+      <article class="service-card content-card">
+        <span class="service-tag">מפגש</span>
+        <h3>מפגש מיפוי וייעוץ אישי</h3>
+        <div class="price">₪450</div>
+        <p class="price-note">לפגישה · עד שעה</p>
+        <ul>
+          <li>עיבוד בקשה או מצב ספציפי</li>
+          <li>הבנת רגשות ותגובות</li>
+          <li>המלצות מעשיות</li>
+        </ul>
+        <a href="/booking?service=single" class="btn-primary">קבע פגישה אונליין</a>
+      </article>
+      <!-- Mid Package -->
+      <article class="service-card content-card featured">
+        <span class="service-tag">חבילה לפתרון הבעיה</span>
+        <h3>מסלול לפתרון הבעיה ספציפית-מחזור עד שלושה מפגשים</h3>
+        <div class="price-row">
+          <div class="price">₪2,190</div>
+        </div>
+        <ul>
+          <li>מיקוד בבעיה ספציפית, פחד, חרדה, התפתחות אישית, ביטחון עצמי.</li>
+          <li>תוכנית פעולה אישית וברורה</li>
+          <li>מעקב אישי אחרי ההתקדמות שלך</li>
+          <li>בדיקה וודאית של התוצאה – אתה תרגיש את השינוי!</li>
+        </ul>
+        <a href="/booking?service=package" class="btn-primary">קבע פגישה אונליין</a>
+      </article>
+      <!-- Premium Package -->
+      <article class="service-card content-card premium">
+        <span class="service-tag">‏חבילה לפתרון התקף חרדה</span>
+        <h3>‏מסלול לפתרון התקף חרדה-מחזור עד חמישה מפגשים</h3>
+        <div class="price">₪3,490</div>
+        <ul>
+          <li>מיפוי של שורש של ההתקף חרדה, זיהוי טריגרים שמפעילים אותו.</li>
+          <li>תוכנית פעולה אישית לשליטה בזמן התקף</li>
+          <li>ליווי הדרגתי עד חזרה לתחושת ביטחון ויציבות</li>
+          <li>מעקב אישי אחרי ההתקדמות בין המפגשים</li>
+        </ul>
+        <a href="/booking?service=package" class="btn-primary btn-on-premium">קבע פגישה אונליין</a>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -959,57 +1123,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-inner">
-    <p class="section-tag">שירותים ומחירים</p>
-    <h2 class="section-title">כיצד אוכל לעזור</h2>
-    <div class="services-grid card-grid">
-      <!-- Session -->
-      <article class="service-card content-card">
-        <span class="service-tag">מפגש</span>
-        <h3>מפגש מיפוי וייעוץ אישי</h3>
-        <div class="price">₪450</div>
-        <p class="price-note">לפגישה · עד שעה</p>
-        <ul>
-          <li>עיבוד בקשה או מצב ספציפי</li>
-          <li>הבנת רגשות ותגובות</li>
-          <li>המלצות מעשיות</li>
-        </ul>
-        <a href="/booking?service=single" class="btn-primary">קבע פגישה אונליין</a>
-      </article>
-      <!-- Mid Package -->
-      <article class="service-card content-card featured">
-        <span class="service-tag">חבילה לפתרון הבעיה</span>
-        <h3>מסלול לפתרון הבעיה ספציפית-מחזור עד שלושה מפגשים</h3>
-        <div class="price-row">
-          <div class="price">₪2,190</div>
-        </div>
-        <ul>
-          <li>מיקוד בבעיה ספציפית, פחד, חרדה, התפתחות אישית, ביטחון עצמי.</li>
-          <li>תוכנית פעולה אישית וברורה</li>
-          <li>מעקב אישי אחרי ההתקדמות שלך</li>
-          <li>בדיקה וודאית של התוצאה – אתה תרגיש את השינוי!</li>
-        </ul>
-        <a href="/booking?service=package" class="btn-primary">קבע פגישה אונליין</a>
-      </article>
-      <!-- Premium Package -->
-      <article class="service-card content-card premium">
-        <span class="service-tag">‏חבילה לפתרון התקף חרדה</span>
-        <h3>‏מסלול לפתרון התקף חרדה-מחזור עד חמישה מפגשים</h3>
-        <div class="price">₪3,490</div>
-        <ul>
-          <li>מיפוי של שורש של ההתקף חרדה, זיהוי טריגרים שמפעילים אותו.</li>
-          <li>תוכנית פעולה אישית לשליטה בזמן התקף</li>
-          <li>ליווי הדרגתי עד חזרה לתחושת ביטחון ויציבות</li>
-          <li>מעקב אישי אחרי ההתקדמות בין המפגשים</li>
-        </ul>
-        <a href="/booking?service=package" class="btn-primary btn-on-premium">קבע פגישה אונליין</a>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- HOW IT WORKS -->
 <section id="how">
   <div class="section-inner">
@@ -1040,13 +1153,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<!-- PLACEHOLDER — replace blockquote content with real client testimonials before publishing -->
+<section id="testimonials">
+  <div class="section-inner">
+    <p class="section-tag">מה אומרים המטופלים</p>
+    <h2 class="section-title">חוויות אמיתיות</h2>
+    <p class="section-sub">מטופלים שעברו את התהליך ורואים שינוי אמיתי בחיי היום-יום שלהם.</p>
+    <div class="testimonials-grid">
+      <article class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"לפני הטיפול הייתי מוקף חרדה חברתית בכל מפגש. אחרי 3 פגישות עם דמיטרי הרגשתי שינוי ממשי — פחות מתח, יותר ביטחון עצמי."</blockquote>
+        <cite>— א.ב., תל אביב</cite>
+      </article>
+      <article class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"דמיטרי עזר לי להבין את הקשר בין רגשות שדחקתי לכאב הכרוני שסבלתי ממנו. תהליך שינה את הדרך שאני מסתכל על עצמי."</blockquote>
+        <cite>— מ.ר., חיפה</cite>
+      </article>
+      <article class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"תהליך מקצועי ומותאם אישי. הרגשתי שמגיעים אלי עם כבוד ובלי שיפוטיות. הפחד שעצר אותי שנים — פשוט ירד."</blockquote>
+        <cite>— ד.ל., ירושלים</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <div class="contact-inner">
       <p class="section-tag">צור קשר</p>
       <h2 class="section-title">יש לכם שאלה?</h2>
-      <p class="contact-intro">כתבו לנו דרך אחד מהאמצעים האלו ונחזור אליכם בהקדם האפשרי.</p>
+      <p class="contact-intro">השאירו פרטים ונחזור אליכם בהקדם, או כתבו ישירות דרך WhatsApp / Telegram.</p>
+
+      <!-- Inline contact form — fires conversion event on submit -->
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="contact-form-row">
+          <input type="text" id="cf-name" name="name" placeholder="השם שלך *" required autocomplete="name" />
+          <input type="text" id="cf-phone" name="phone" placeholder="טלפון או מייל *" required autocomplete="tel" dir="ltr" />
+        </div>
+        <textarea id="cf-message" name="message" rows="4" placeholder="הכתבו כאן את השאלה שלכם..."></textarea>
+        <button type="submit" class="btn-primary contact-form-submit">שלח הודעה</button>
+      </form>
+      <div class="contact-form-success" id="contact-form-success" hidden aria-live="polite">
+        ✓ &nbsp;תודה! קיבלנו את ההודעה שלך — נחזור אליך בהקדם.
+      </div>
+
+      <div class="contact-divider">או כתבו ישירות</div>
+
       <div class="contact-info">
         <a href="https://wa.me/972528056068" target="_blank" rel="noopener noreferrer" class="contact-item">
           <span class="contact-mark"><img src="assets/icons/whatsapp-official-icon.svg" alt="" aria-hidden="true"></span>
@@ -1115,6 +1271,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }
   });
+
+  // Contact form — fires conversion tracking, then opens mailto
+  const contactForm = document.getElementById('contact-form');
+  const contactSuccess = document.getElementById('contact-form-success');
+  if (contactForm && contactSuccess) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name    = (document.getElementById('cf-name').value    || '').trim();
+      const phone   = (document.getElementById('cf-phone').value   || '').trim();
+      const message = (document.getElementById('cf-message').value || '').trim();
+      if (!name || !phone) {
+        if (!name)  document.getElementById('cf-name').focus();
+        else        document.getElementById('cf-phone').focus();
+        return;
+      }
+
+      // Fire conversion tracking
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'contact_form_submitted', page_language: 'he' });
+      if (typeof gtag === 'function') {
+        gtag('event', 'contact', { event_category: 'lead', event_label: 'contact_form_he' });
+      }
+
+      // Deliver via mailto
+      const subject = encodeURIComponent('פנייה מהאתר — ' + name);
+      const bodyParts = ['שם: ' + name, 'טלפון/מייל: ' + phone];
+      if (message) bodyParts.push('הודעה:\n' + message);
+      window.open('mailto:kadimaclinic@gmail.com?subject=' + subject + '&body=' + encodeURIComponent(bodyParts.join('\n')), '_self');
+
+      contactForm.hidden = true;
+      contactSuccess.hidden = false;
+    });
+  }
 
   document.addEventListener('click', (event) => {
     const moreButton = event.target.closest('[data-readmore-btn]');
