@@ -1,8 +1,8 @@
 {
   "name": "dimatherapy-production",
-  "version": "3.0.0",
+  "version": "1.0.1",
   "private": true,
-  "description": "Archivos estaticos compilados de Dima Therapy 3.0 para Hostinger",
+  "description": "Diseño original de Dima Therapy restaurado; sitio estático para Hostinger",
   "scripts": {
     "build": "node -e \"console.log('Static site ready')\""
   }
