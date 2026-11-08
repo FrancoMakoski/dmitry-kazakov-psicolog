@@ -48,5 +48,129 @@ p.contact-intro {
   opacity: .8;
 }
 
+/* La ayuda de presentación sale del botón al llegar a servicios y precios. */
+.whatsapp-widget {
+  position: fixed;
+  inset-inline-end: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+}
+
+.whatsapp-widget .whatsapp-help {
+  position: relative;
+  inset: auto;
+}
+
+.whatsapp-thought {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: calc(100% + 24px);
+  inline-size: 284px;
+  max-inline-size: calc(100vw - 32px);
+  border: 1px solid #d5e3d8;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(41, 61, 45, .14);
+  opacity: 0;
+  transform: translateY(8px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 2s ease-out, transform 2s ease-out, visibility 0s linear 2s;
+}
+
+.whatsapp-thought.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.whatsapp-thought::before,
+.whatsapp-thought::after {
+  content: '';
+  position: absolute;
+  border: 1px solid #d5e3d8;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+}
+
+.whatsapp-thought::before {
+  inline-size: 14px;
+  block-size: 14px;
+  inset-inline-end: 26px;
+  bottom: -15px;
+}
+
+.whatsapp-thought::after {
+  inline-size: 7px;
+  block-size: 7px;
+  inset-inline-end: 23px;
+  bottom: -25px;
+}
+
+.whatsapp-thought-link {
+  display: block;
+  padding: 20px 22px;
+  padding-inline-start: 46px;
+  border-radius: inherit;
+  color: #4a6950;
+  font-family: inherit;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+}
+
+.whatsapp-thought-link strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.whatsapp-thought-link span {
+  display: block;
+  margin-top: 4px;
+  color: #5a5a5a;
+  font-size: .9rem;
+}
+
+.whatsapp-thought-close {
+  position: absolute;
+  inset-inline-start: 2px;
+  top: 2px;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #5a5a5a;
+  font: 24px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+
+.whatsapp-thought-link:hover,
+.whatsapp-thought-close:hover { background: #f4f8f4; }
+
+.whatsapp-widget a:focus-visible,
+.whatsapp-thought-close:focus-visible {
+  outline: 2px solid #4a6950;
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-widget {
+    inset-inline-end: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-thought { transition: none; }
+  .whatsapp-widget .whatsapp-help { transition: none; }
+}
+
 /* Respetar hidden también en formularios con display:grid. */
 [hidden] { display: none !important; }

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Дмитрий Казаков — Психостоматолог</title>
   <link rel="icon" type="image/png" href="../assets/icons/favicon-d.png" />
-  <link rel="stylesheet" href="../assets/css/site.css?v=20261026" />
+  <link rel="stylesheet" href="../assets/css/site.css?v=20261108" />
   <!-- SEO: hreflang -->
   <link rel="alternate" hreflang="he" href="https://dimatherapyonline.com/" />
   <link rel="alternate" hreflang="ru" href="https://dimatherapyonline.com/ru/" />
@@ -1040,6 +1040,45 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const thought = document.querySelector('[data-whatsapp-thought]');
+    const services = document.getElementById('services');
+    const whatsapp = document.querySelector('.whatsapp-widget .whatsapp-help');
+    const closeThought = document.querySelector('[data-whatsapp-thought-close]');
+    if (thought && services && whatsapp && closeThought && 'IntersectionObserver' in window) {
+      let dismissed = false;
+      const hideThought = () => {
+        // Si el foco estaba en la burbuja, conservarlo en el acceso a WhatsApp.
+        if (thought.contains(document.activeElement)) whatsapp.focus({ preventScroll: true });
+        thought.classList.remove('is-visible');
+        thought.inert = true;
+        thought.setAttribute('aria-hidden', 'true');
+        whatsapp.removeAttribute('aria-describedby');
+      };
+      hideThought();
+      // La visibilidad diferida deja terminar el fundido sin temporizadores.
+      thought.hidden = false;
+      const observer = new window.IntersectionObserver(([entry]) => {
+        if (dismissed || !entry.isIntersecting) {
+          hideThought();
+          return;
+        }
+        thought.classList.add('is-visible');
+        thought.inert = false;
+        thought.removeAttribute('aria-hidden');
+        whatsapp.setAttribute('aria-describedby', 'whatsapp-thought-copy');
+      }, { rootMargin: '-64px 0px -64px 0px', threshold: 0 });
+      const dismissThought = () => {
+        dismissed = true;
+        hideThought();
+        observer.disconnect();
+      };
+      closeThought.addEventListener('click', dismissThought);
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && thought.classList.contains('is-visible')) dismissThought();
+      });
+      observer.observe(services);
+    }
+
     const nav = document.querySelector('nav');
     const navToggle = document.querySelector('[data-nav-toggle]');
     const navMenu = document.querySelector('[data-nav-menu]');
@@ -1116,8 +1155,17 @@
     }
   });
 </script>
-<a class="whatsapp-help" href="https://wa.me/972526407881" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-  <img src="../assets/icons/whatsapp-official-icon.svg" alt="" aria-hidden="true">
-</a>
+<div class="whatsapp-widget">
+  <div class="whatsapp-thought" data-whatsapp-thought hidden>
+    <button class="whatsapp-thought-close" type="button" data-whatsapp-thought-close aria-label="Закрыть сообщение">&times;</button>
+    <a class="whatsapp-thought-link" id="whatsapp-thought-copy" href="https://wa.me/972526407881" target="_blank" rel="noopener noreferrer">
+      <strong>Бесплатная ознакомительная беседа</strong>
+      <span>Без обязательств</span>
+    </a>
+  </div>
+  <a class="whatsapp-help" href="https://wa.me/972526407881" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <img src="../assets/icons/whatsapp-official-icon.svg" alt="" aria-hidden="true">
+  </a>
+</div>
 </body>
 </html>
